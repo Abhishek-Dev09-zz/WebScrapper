@@ -10,31 +10,27 @@ let scrape = async () => {
     '#block-gavias-vinor-page-title > div > h1 > span > font > font',
     el => el.textContent
   )
-  console.log(heading1)
+  console.log(heading1 +'\n')
  await page.waitForSelector('#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-nothing > span > span:nth-child(1) > font > font')
  const publication = await page.$eval(
     '#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-nothing > span > span:nth-child(1) > font > font',
     el => el.textContent
   )
   console.log('PUBLICATION DATE: ' + publication)
- await page.waitForSelector('#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-nothing > span > span:nth-child(19) > span > font > font')
- const bidding = await page.$eval(
-    '#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-nothing > span > span:nth-child(19) > span > font > font',
-    el => el.textContent
-  )
-  console.log('BIDDING DATE: '+ bidding)
  await page.waitForSelector('#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-nothing > span > span:nth-child(19) > font > font')
- const object = await page.$eval(
+ const bidding = await page.$eval(
     '#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-nothing > span > span:nth-child(19) > font > font',
     el => el.textContent
   )
-  console.log('OBJECT: ' + object)
- await page.waitForSelector('#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-field-historico-da-licitacao > div > table > tbody > tr > td:nth-child(2) > div > div > div > a > img')
- const link = await page.$eval(
-    '#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-field-historico-da-licitacao > div > table > tbody > tr > td:nth-child(2) > div > div > div > a > img',
+  console.log('BIDDING DATE: '+ bidding)
+ await page.waitForSelector('#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-nothing > span > p:nth-child(6) > font > font')
+ const object = await page.$eval(
+    '#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-nothing > span > p:nth-child(6) > font > font',
     el => el.textContent
   )
-  console.log('link: ' + link)
+  console.log('OBJECT: ' + object)
+const URLs = await page.$eval('#block-views-block-view-noticia-pbh-block-5 > div > div > div > div > div > div.views-field.views-field-field-historico-da-licitacao > div > table > tbody > tr > td:nth-child(2) > div > div > div > a', anchor => anchor.getAttribute('href'));
+console.log('Links: ' + URLs);
 await browser.close();
 };
 scrape().then((value) => {
